@@ -24,7 +24,7 @@ body {
     left: -5%;
     width: 110%;
     height: 110%;
-    background-image: url('capirotes.jpg');
+    background-image: url('imgs/capirotes.jpg');
     background-size: cover;
     background-position: center;
     filter: blur(8px);
@@ -90,6 +90,26 @@ body {
     text-transform: uppercase;
     text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.8);
 }
+.contenedorEscudos {
+    position: absolute;
+    bottom: 85px;
+    left: 50px;
+    display: flex;
+    gap: 15px;
+    z-index: 4;
+}
+.imagenEscudo {
+    width: auto;
+    height: 55px;
+    opacity: 0.5;
+    filter: grayscale(100%);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+}
+.imagenEscudo:hover {
+    opacity: 1;
+    transform: scale(1.1);
+    filter: grayscale(0%);
+}
 .pieDePagina {
     position: absolute;
     bottom: 0;
@@ -117,11 +137,92 @@ body {
     letter-spacing: 2px;
     text-transform: uppercase;
 }
+.botonInformacion {
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #888888;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+.botonInformacion:hover {
+    color: #ffffff;
+    border-color: #ffffff;
+}
+.modalAviso {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 10;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+.modalAviso.visible {
+    display: flex;
+    opacity: 1;
+}
+.contenidoModal {
+    background-color: #0a0a0a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    max-width: 500px;
+    text-align: center;
+    color: #bbbbbb;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.8);
+}
+.tituloModal {
+    color: #ffffff;
+    font-size: 1.2rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+.textoModal {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+.botonCerrarModal {
+    margin-top: 20px;
+    background-color: #ffffff;
+    color: #000000;
+    border: none;
+    padding: 10px 25px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.grupoIzquierdaFooter {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
 </style>
 </head>
 <body id="cuerpoDocumento">
 <div class="capaFondoImagen" id="capaFondo"></div>
 <div class="capaMarcoOscuro"></div>
+
 <div class="contenedorTextos">
     <div class="textoSuperior" id="etiquetaSuperior">A ESTA ES...</div>
     <div class="numerosCuenta">
@@ -133,12 +234,38 @@ body {
         <div class="puntoSeparador">.</div>
         <div class="cifra" id="contadorSegundos">00</div>
     </div>
-    <div class="textoInferior" id="etiquetaInferior">SEMANA SANTA</div>
+    <div class="textoInferior" id="etiquetaInferior">SEMANA SANTA MÉRIDA</div>
 </div>
+
+<div class="contenedorEscudos">
+    <a href="https://semanasantademerida.es/calvario/" target="_blank"><img src="imgs/calvario.png" alt="Escudo 1" class="imagenEscudo"></a>
+    <a href="https://semanasantademerida.es/castillos/" target="_blank"><img src="imgs/castillos.png" alt="Escudo 2" class="imagenEscudo"></a>
+    <a href="https://semanasantademerida.es/ferroviarios/" target="_blank"><img src="imgs/ferroviarios.png" alt="Escudo 3" class="imagenEscudo"></a>
+    <a href="https://semanasantademerida.es/infantiles/" target="_blank"><img src="imgs/infantil.png" alt="Escudo 4" class="imagenEscudo"></a>
+    <a href="https://semanasantademerida.es/la-paz/" target="_blank"><img src="imgs/la paz.png" alt="Escudo 5" class="imagenEscudo"></a>
+    <a href="https://semanasantademerida.es/vera-cruz/" target="_blank"><img src="imgs/veracruz.png" alt="Escudo 6" class="imagenEscudo"></a>
+    <a href="https://semanasantademerida.es/tres-caidas/" target="_blank"><img src="imgs/trescaidas.png" alt="Escudo 7" class="imagenEscudo"></a>
+    <a href="https://semanasantademerida.es/las-lagrimas/" target="_blank"><img src="imgs/lagrimas.png" alt="Escudo 8" class="imagenEscudo"></a>
+    <a href="https://semanasantademerida.es/sagrada-cena/" target="_blank"><img src="imgs/sagradacena.png" alt="Escudo 9" class="imagenEscudo"></a>
+</div>
+
 <footer class="pieDePagina">
-    <div class="nombreFooter">IVÁN RUBIO MURILLO</div>
+    <div class="grupoIzquierdaFooter">
+        <div class="nombreFooter">IVÁN RUBIO MURILLO</div>
+        <button class="botonInformacion" id="abrirModal">i</button>
+    </div>
     <div class="derechosFooter">&copy; 2026 — TODOS LOS DERECHOS RESERVADOS</div>
 </footer>
+
+<div class="modalAviso" id="ventanaModal">
+    <div class="contenidoModal">
+        <h2 class="tituloModal">Aviso Legal</h2>
+        <p class="textoModal">Este es un proyecto personal, de carácter gratuito y sin ningún tipo de ánimo de lucro.</p>
+        <p class="textoModal">Todas las imágenes, escudos y estandartes mostrados en esta página son propiedad exclusiva de sus respectivas Hermandades y Cofradías de Mérida.</p>
+        <button class="botonCerrarModal" id="cerrarModal">Entendido</button>
+    </div>
+</div>
+
 <script>
 const nodoDias = document.getElementById('contadorDias');
 const nodoHoras = document.getElementById('contadorHoras');
@@ -148,6 +275,24 @@ const etiquetaSuperior = document.getElementById('etiquetaSuperior');
 const etiquetaInferior = document.getElementById('etiquetaInferior');
 const capaFondo = document.getElementById('capaFondo');
 const cuerpoDocumento = document.getElementById('cuerpoDocumento');
+
+const botonAbrirModal = document.getElementById('abrirModal');
+const botonCerrar = document.getElementById('cerrarModal');
+const contenedorModal = document.getElementById('ventanaModal');
+
+botonAbrirModal.addEventListener('click', () => {
+    contenedorModal.style.display = 'flex';
+    setTimeout(() => {
+        contenedorModal.classList.add('visible');
+    }, 10);
+});
+
+botonCerrar.addEventListener('click', () => {
+    contenedorModal.classList.remove('visible');
+    setTimeout(() => {
+        contenedorModal.style.display = 'none';
+    }, 300);
+});
 
 const coloresDias = {
     0: '#4a0000', 
@@ -217,7 +362,7 @@ function procesarCicloSemanaSanta() {
     if (fechaActual.getTime() < inicioSemanaSanta.getTime()) {
         tiempoRestante = inicioSemanaSanta.getTime() - fechaActual.getTime();
         etiquetaSuperior.innerText = "A ESTA ES...";
-        etiquetaInferior.innerText = `SEMANA SANTA ${anioObjetivo}`;
+        etiquetaInferior.innerText = `SEMANA SANTA MÉRIDA ${anioObjetivo}`;
         capaFondo.classList.remove('oculto');
         cuerpoDocumento.style.backgroundColor = "#000000";
     } else {
