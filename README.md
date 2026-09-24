@@ -23,4 +23,4 @@ Al ser un proyecto web estático, no requiere dependencias, compilación ni un s
 
 1. Clona este repositorio: 
    ```bash
-   git clone [https://github.com/TU-USUARIO/NOMBRE-DEL-REPOSITORIO.git](https://github.com/TU-USUARIO/NOMBRE-DEL-REPOSITORIO.git)
+   git clone [https://github.com/ivaanrubio47/A-esta-es](https://github.com/ivaanrubio47/A-esta-es.git)
