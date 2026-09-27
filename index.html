@@ -32,7 +32,7 @@ body {
     background-image: url('imgs/carrusel/capirotes.jpg');
     background-size: cover;
     background-position: center;
-    filter: blur(3px);
+    filter: blur(5px);
     z-index: 1;
     transition: opacity 1s ease-in-out;
 }
@@ -263,8 +263,8 @@ body {
     position: absolute;
     bottom: 150px;
     left: 50px;
-    color: #888888;
-    font-size: 0.65rem;
+    color: #f8f8f8;
+    font-size: 0.85rem;
     letter-spacing: 3px;
     text-transform: uppercase;
     z-index: 4;
@@ -295,7 +295,7 @@ body {
     </div>
     <div class="textoInferior" id="etiquetaInferior">SEMANA SANTA MÉRIDA</div>
 </div>
-<div class="textoIndicadorEscudos">PULSA UN ESCUDO PARA VER SU INFORMACIÓN OFICIAL</div>
+<div class="textoIndicadorEscudos">Pulse en los estandartes para ver información detallada acerca de cada hermandad</div>
 <div class="contenedorEscudos">
     <a href="https://semanasantademerida.es/calvario/" target="_blank"><img src="imgs/estandartes/calvario.png" alt="Escudo 1" class="imagenEscudo"></a>
     <a href="https://semanasantademerida.es/castillos/" target="_blank"><img src="imgs/estandartes/castillos.png" alt="Escudo 2" class="imagenEscudo"></a>
@@ -446,10 +446,25 @@ function procesarCicloSemanaSanta() {
 setInterval(procesarCicloSemanaSanta, 1000);
 procesarCicloSemanaSanta();
 
-const imagenesFondo = ['imgs/carrusel/capirotes.jpg', 'imgs/carrusel/costalerostrescaidas.jpeg', 'imgs/carrusel/nazarenoscalvario.jpeg', 'imgs/carrusel/mantillasbn.jpeg', 'imgs/carrusel/dolores.jpeg', 'imgs/carrusel/infantiles.jpeg'];
-let indiceImagenActual = Math.floor(Math.random() * imagenesFondo.length);
+const imagenesFondo = ['imgs/carrusel/costalerostrescaidas.jpeg', 'imgs/carrusel/nazarenoscalvario.jpeg', 'imgs/carrusel/mantillasbn.jpeg', 'imgs/carrusel/dolores.jpeg', 'imgs/carrusel/infantiles.jpeg', 'imgs/carrusel/arcotrajano.jpeg', 'imgs/carrusel/flajelacion.jpeg', 'imgs/carrusel/nazarenosinfantilesconcalvario.jpeg', 'imgs/carrusel/policias.jpeg'];
+let imagenesDisponibles = [];
+let imagenActual = "";
 
-capaFondo.style.backgroundImage = `url('${imagenesFondo[indiceImagenActual]}')`;
+function obtenerSiguienteFondo() {
+    if (imagenesDisponibles.length === 0) {
+        imagenesDisponibles = [...imagenesFondo];
+        if (imagenesDisponibles.includes(imagenActual) && imagenesFondo.length > 1) {
+            const indiceRepetido = imagenesDisponibles.indexOf(imagenActual);
+            imagenesDisponibles.splice(indiceRepetido, 1);
+        }
+    }
+    const indiceAleatorio = Math.floor(Math.random() * imagenesDisponibles.length);
+    const seleccion = imagenesDisponibles.splice(indiceAleatorio, 1)[0];
+    return seleccion;
+}
+
+imagenActual = obtenerSiguienteFondo();
+capaFondo.style.backgroundImage = `url('${imagenActual}')`;
 
 function rotarFondoAleatorio() {
     if (etiquetaSuperior.innerText !== "A ESTA ES...") {
@@ -459,13 +474,8 @@ function rotarFondoAleatorio() {
     capaFondo.classList.add('oculto');
     
     setTimeout(() => {
-        let indiceSiguiente;
-        do {
-            indiceSiguiente = Math.floor(Math.random() * imagenesFondo.length);
-        } while (indiceSiguiente === indiceImagenActual && imagenesFondo.length > 1);
-        
-        indiceImagenActual = indiceSiguiente;
-        capaFondo.style.backgroundImage = `url('${imagenesFondo[indiceImagenActual]}')`;
+        imagenActual = obtenerSiguienteFondo();
+        capaFondo.style.backgroundImage = `url('${imagenActual}')`;
         
         if (etiquetaSuperior.innerText === "A ESTA ES...") {
             capaFondo.classList.remove('oculto');
@@ -473,7 +483,7 @@ function rotarFondoAleatorio() {
     }, 1000);
 }
 
-setInterval(rotarFondoAleatorio, 3000);
+setInterval(rotarFondoAleatorio, 4000);
 </script>
 </body>
 </html>
