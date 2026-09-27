@@ -5,16 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>A esta es...</title>
 <style>
-body {
+html, body {
     margin: 0;
-    height: 100vh;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
     background-color: #000000;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     font-family: 'Times New Roman', Times, serif;
-    overflow: hidden;
     position: relative;
     transition: background-color 1s ease-in-out;
 }
@@ -27,7 +32,7 @@ body {
     background-image: url('imgs/capirotes.jpg');
     background-size: cover;
     background-position: center;
-    filter: blur(8px);
+    filter: blur(3px);
     z-index: 1;
     transition: opacity 1s ease-in-out;
 }
@@ -101,14 +106,10 @@ body {
 .imagenEscudo {
     width: auto;
     height: 55px;
-    opacity: 0.5;
-    filter: grayscale(100%);
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
 }
 .imagenEscudo:hover {
-    opacity: 1;
     transform: scale(1.1);
-    filter: grayscale(0%);
 }
 .pieDePagina {
     position: absolute;
@@ -258,6 +259,23 @@ body {
         width: 85%;
     }
 }
+.textoIndicadorEscudos {
+    position: absolute;
+    bottom: 150px;
+    left: 50px;
+    color: #888888;
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    z-index: 4;
+}
+.textoIndicadorEscudos {
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 180px;
+        width: 100%;
+        text-align: center;
+    }
 </style>
 </head>
 <body id="cuerpoDocumento">
@@ -277,7 +295,7 @@ body {
     </div>
     <div class="textoInferior" id="etiquetaInferior">SEMANA SANTA MÉRIDA</div>
 </div>
-
+<div class="textoIndicadorEscudos">PULSA UN ESCUDO PARA VER SU INFORMACIÓN OFICIAL</div>
 <div class="contenedorEscudos">
     <a href="https://semanasantademerida.es/calvario/" target="_blank"><img src="imgs/calvario.png" alt="Escudo 1" class="imagenEscudo"></a>
     <a href="https://semanasantademerida.es/castillos/" target="_blank"><img src="imgs/castillos.png" alt="Escudo 2" class="imagenEscudo"></a>
@@ -427,6 +445,35 @@ function procesarCicloSemanaSanta() {
 
 setInterval(procesarCicloSemanaSanta, 1000);
 procesarCicloSemanaSanta();
+
+const imagenesFondo = ['imgs/capirotes.jpg', 'imgs/costalerostrescaidas.jpeg', 'imgs/nazarenoscalvario.jpeg', 'imgs/mantillasbn.jpeg', 'imgs/dolores.jpeg', 'imgs/infantiles.jpeg'];
+let indiceImagenActual = Math.floor(Math.random() * imagenesFondo.length);
+
+capaFondo.style.backgroundImage = `url('${imagenesFondo[indiceImagenActual]}')`;
+
+function rotarFondoAleatorio() {
+    if (etiquetaSuperior.innerText !== "A ESTA ES...") {
+        return;
+    }
+    
+    capaFondo.classList.add('oculto');
+    
+    setTimeout(() => {
+        let indiceSiguiente;
+        do {
+            indiceSiguiente = Math.floor(Math.random() * imagenesFondo.length);
+        } while (indiceSiguiente === indiceImagenActual && imagenesFondo.length > 1);
+        
+        indiceImagenActual = indiceSiguiente;
+        capaFondo.style.backgroundImage = `url('${imagenesFondo[indiceImagenActual]}')`;
+        
+        if (etiquetaSuperior.innerText === "A ESTA ES...") {
+            capaFondo.classList.remove('oculto');
+        }
+    }, 1000);
+}
+
+setInterval(rotarFondoAleatorio, 6000);
 </script>
 </body>
 </html>
