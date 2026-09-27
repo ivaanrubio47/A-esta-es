@@ -29,7 +29,7 @@ body {
     left: -5%;
     width: 110%;
     height: 110%;
-    background-image: url('imgs/capirotes.jpg');
+    background-image: url('imgs/carrusel/capirotes.jpg');
     background-size: cover;
     background-position: center;
     filter: blur(3px);
@@ -446,7 +446,7 @@ function procesarCicloSemanaSanta() {
 setInterval(procesarCicloSemanaSanta, 1000);
 procesarCicloSemanaSanta();
 
-const imagenesFondo = ['imgs/capirotes.jpg', 'imgs/costalerostrescaidas.jpeg', 'imgs/nazarenoscalvario.jpeg', 'imgs/mantillasbn.jpeg', 'imgs/dolores.jpeg', 'imgs/infantiles.jpeg'];
+const imagenesFondo = ['imgs/carrusel/capirotes.jpg', 'imgs/carrusel/costalerostrescaidas.jpeg', 'imgs/carrusel/nazarenoscalvario.jpeg', 'imgs/carrusel/mantillasbn.jpeg', 'imgs/carrusel/dolores.jpeg', 'imgs/carrusel/infantiles.jpeg'];
 let indiceImagenActual = Math.floor(Math.random() * imagenesFondo.length);
 
 capaFondo.style.backgroundImage = `url('${imagenesFondo[indiceImagenActual]}')`;
